@@ -1,8 +1,8 @@
 
-#csdaiwei@foxmail.com
-#featurization text data in ./data folder and save as .npz file
+# csdaiwei@foxmail.com
+# featurization text data in ./data folder and save as .npz file
 
-#do not import this module
+# do not import this module
 
 import os
 import pdb

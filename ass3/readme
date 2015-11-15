@@ -1,0 +1,10 @@
+4 modules in this folder, they are:
+
+$ python preprocess.py   	 #generate train.npz and test.npz
+$ python knn.py 		 	 #generate knn results (see below)
+$ python naivebayes.py 	 	 #generate naivebayes results (see below)
+$ python compare_methods.py  #generate compare methods results
+
+First of all, unzip original data(http://cs.nju.edu.cn/dxy/review_sentiment.rar) as ./data 
+Then, try preprocess.py to generate train.npz and test.npz
+Other 3 modules will not run properly without these .npz file

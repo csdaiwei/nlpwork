@@ -1,6 +1,6 @@
 
-#csdaiwei@foxmail.com
-#k nearest neighbour classifier
+# csdaiwei@foxmail.com
+# k nearest neighbour classifier
 
 import pdb
 import numpy as np
@@ -24,7 +24,7 @@ class KNN:
 	def predict(self, X):
 		p = []
 		for x in X:
-			dists = np.array([self.__distance(x, y, self.dist) for y in self.X])
+			dists = np.array([self.__distance(x, y, self.dist) for y in self.X])	
 			knn_y = self.Y[dists.argpartition(self.K)[0:self.K]]
 			p.append(self.__mode(knn_y))
 		return p

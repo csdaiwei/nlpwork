@@ -1,9 +1,15 @@
 
-#csdaiwei@foxmail.com
+# csdaiwei@foxmail.com
 
-#test compare methods by scikit-learn, totally 5 methods with all default parameter
-#multinominal naive bayes classifier, knn classifier, logistic regression classifier
-#decision tree classifier , svm classifier
+# test compare methods by scikit-learn
+
+# 6 methods with default parameters were tested, they are
+# bernoulli naivebayes classifier, multinominal naive bayes classifier, knn classifier,
+# logistic regression classifier, decision tree classifier , svm classifier
+
+# data dimensions vary from 50 to 10000, sorted by tf-idf
+
+# do not import this module
 
 import pdb
 import numpy as np
@@ -24,7 +30,6 @@ test_samples_full, test_labels = test['samples'], test['labels']
 
 
 #start compare test
-
 for dim in [50, 100, 200, 500, 1000, 2000, 5000, 10000]:
 	train_samples = train_samples_full[:, 0:dim]
 	test_samples = test_samples_full[:, 0:dim]

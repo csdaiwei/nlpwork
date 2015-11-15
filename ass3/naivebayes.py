@@ -1,6 +1,6 @@
 
-#csdaiwei@foxmail.com
-#naive bayes classifier (multinomial, bernoulli)
+# csdaiwei@foxmail.com
+# naive bayes classifier (multinomial, bernoulli)
 
 import pdb
 import numpy as np
