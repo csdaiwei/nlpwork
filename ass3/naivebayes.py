@@ -45,9 +45,7 @@ class NaiveBayes:
 		return np.array(p)
 
 	def __logposterior(self, x, y):		#log(p(x|y) * p(y)) (common denominator omitted)
-		
 		p = log(self.classprob[y])
-
 		if self.model == 'multinomial':
 			#p += log(float(ftl(x.sum()))/reduce(lambda x,y:x*y, map(ftl, x))) #discard by long int to float overflow
 			for i in xrange(0, len(x)):

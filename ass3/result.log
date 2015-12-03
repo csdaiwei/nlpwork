@@ -2,8 +2,8 @@
 log of raw output in terminal.
 
 $ python preprocess.py   		#generate train.npz and test.npz
-$ python knn.py 		 		#generate knn results (see below)
-$ python naivebayes.py 	 		#generate naivebayes results (see below)
+$ python knn.py 		 		#generate knn results (below)
+$ python naivebayes.py 	 		#generate naivebayes results
 $ python compare_methods.py  	#generate compare methods results
 
 
@@ -17,63 +17,90 @@ $ python compare_methods.py  	#generate compare methods results
 ==== naivebayes results ==============================
 ======================================================
 
+multinomial model
+naivebayes dim:50       accu:0.7220, time:0.208977
+naivebayes dim:100      accu:0.7705, time:0.343978
+naivebayes dim:200      accu:0.8060, time:0.599703
+naivebayes dim:500      accu:0.8350, time:1.348541
+naivebayes dim:1000     accu:0.8515, time:2.557189
+naivebayes dim:2000     accu:0.8618, time:4.937909
+naivebayes dim:5000     accu:0.8650, time:12.128316
+naivebayes dim:10000    accu:0.8662, time:24.131332
 
+bernoulli model
+naivebayes dim:50       accu:0.7095, time:0.722104
+naivebayes dim:100      accu:0.7385, time:1.644102
+naivebayes dim:200      accu:0.7492, time:3.921156
+naivebayes dim:500      accu:0.7688, time:14.198455
+naivebayes dim:1000     accu:0.7782, time:66.464808
+naivebayes dim:2000     accu:0.7927, time:233.530486
+naivebayes dim:5000     accu:0.8105, time:1366.404011
+naivebayes dim:10000    accu:0.8215, time:5329.419258
 
 =======================================================
 ==== sklearn compare method results ===================
 =======================================================
+
 execute compare test on data dim 50
-sklearn mnb     accu:0.7232, time:0.015033
-sklearn knn     accu:0.6875, time:5.722096
-sklearn sgdlr   accu:0.7338, time:0.023273
-sklearn dt      accu:0.6825, time:0.186510
-sklearn svm     accu:0.7378, time:13.703592
+sklearn bnb     accu:0.7095, time:0.023273
+sklearn mnb     accu:0.7232, time:0.013110
+sklearn knn     accu:0.6875, time:5.717413
+sklearn sgdlr   accu:0.7338, time:0.023222
+sklearn dt      accu:0.6775, time:0.187138
+sklearn svm     accu:0.7378, time:14.047502
 
 execute compare test on data dim 100
-sklearn mnb     accu:0.7680, time:0.021601
-sklearn knn     accu:0.7165, time:12.512746
-sklearn sgdlr   accu:0.7678, time:0.045234
-sklearn dt      accu:0.7087, time:0.493740
-sklearn svm     accu:0.7853, time:18.687032
+sklearn bnb     accu:0.7388, time:0.036728
+sklearn mnb     accu:0.7680, time:0.020460
+sklearn knn     accu:0.7165, time:12.449046
+sklearn sgdlr   accu:0.7678, time:0.040043
+sklearn dt      accu:0.7065, time:0.494334
+sklearn svm     accu:0.7853, time:18.391929
 
 execute compare test on data dim 200
-sklearn mnb     accu:0.8070, time:0.035149
-sklearn knn     accu:0.7285, time:28.291222
-sklearn sgdlr   accu:0.8020, time:0.071364
-sklearn dt      accu:0.7320, time:1.262234
-sklearn svm     accu:0.8153, time:33.099603
+sklearn bnb     accu:0.7475, time:0.062037
+sklearn mnb     accu:0.8070, time:0.032384
+sklearn knn     accu:0.7285, time:28.435682
+sklearn sgdlr   accu:0.8020, time:0.069751
+sklearn dt      accu:0.7350, time:1.247743
+sklearn svm     accu:0.8153, time:33.028163
 
 execute compare test on data dim 500
-sklearn mnb     accu:0.8365, time:0.084076
-sklearn knn     accu:0.7262, time:67.486261
-sklearn sgdlr   accu:0.8375, time:0.172412
-sklearn dt      accu:0.7598, time:4.340708
-sklearn svm     accu:0.8343, time:83.999524
+sklearn bnb     accu:0.7640, time:0.151985
+sklearn mnb     accu:0.8365, time:0.092839
+sklearn knn     accu:0.7262, time:70.972355
+sklearn sgdlr   accu:0.8375, time:0.189725
+sklearn dt      accu:0.7658, time:4.559604
+sklearn svm     accu:0.8343, time:95.509347
 
 execute compare test on data dim 1000
-sklearn mnb     accu:0.8528, time:0.170150
-sklearn knn     accu:0.7270, time:131.603881
-sklearn sgdlr   accu:0.8445, time:0.339576
-sklearn dt      accu:0.7728, time:10.620545
-sklearn svm     accu:0.8343, time:180.491105
+sklearn bnb     accu:0.7662, time:0.325894
+sklearn mnb     accu:0.8528, time:0.184006
+sklearn knn     accu:0.7270, time:146.558794
+sklearn sgdlr   accu:0.8445, time:0.375544
+sklearn dt      accu:0.7660, time:11.251104
+sklearn svm     accu:0.8343, time:207.194106
 
 execute compare test on data dim 2000
-sklearn mnb     accu:0.8635, time:0.331617
-sklearn knn     accu:0.7097, time:261.490639
-sklearn sgdlr   accu:0.8535, time:0.716883
-sklearn dt      accu:0.7765, time:24.323024
-sklearn svm     accu:0.8197, time:408.055135
+sklearn bnb     accu:0.7675, time:0.630037
+sklearn mnb     accu:0.8635, time:0.370513
+sklearn knn     accu:0.7097, time:292.104262
+sklearn sgdlr   accu:0.8535, time:0.787901
+sklearn dt      accu:0.7745, time:25.610663
+sklearn svm     accu:0.8197, time:478.759274
 
 execute compare test on data dim 5000
-sklearn mnb     accu:0.8665, time:0.840233
-sklearn knn     accu:0.7093, time:660.811613
-sklearn sgdlr   accu:0.8530, time:1.774522
-sklearn dt      accu:0.7772, time:59.867622
-sklearn svm     accu:0.7550, time:1182.814900
+sklearn bnb     accu:0.7628, time:1.586213
+sklearn mnb     accu:0.8665, time:0.944346
+sklearn knn     accu:0.7093, time:728.662209
+sklearn sgdlr   accu:0.8530, time:1.952277
+sklearn dt      accu:0.7728, time:61.892919
+sklearn svm     accu:0.7550, time:1394.791215
 
 execute compare test on data dim 10000
-sklearn mnb     accu:0.8672, time:1.459569
-sklearn knn     accu:0.7035, time:1320.136953
-sklearn sgdlr   accu:0.8530, time:3.549472
-sklearn dt      accu:0.7748, time:95.791862
-sklearn svm     accu:0.6773, time:2566.038737
+sklearn bnb     accu:0.7595, time:3.172272
+sklearn mnb     accu:0.8672, time:1.662406
+sklearn knn     accu:0.7035, time:1469.621502
+sklearn sgdlr   accu:0.8530, time:3.918058
+sklearn dt      accu:0.7775, time:98.962736
+sklearn svm     accu:0.6773, time:2849.809427
