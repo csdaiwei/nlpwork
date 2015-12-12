@@ -8,6 +8,7 @@ import pdb
 import codecs
 import numpy as np
 
+from time import time
 from scipy.sparse import coo_matrix
 from sklearn.linear_model import LogisticRegression
 
@@ -54,7 +55,7 @@ def extract_line(line):
 		# handle c recursively
 		line = c
 
-def get_sequence(path):
+def extract_file(path):
 	'''
 		read data and generate a sequence per line
 	'''
@@ -111,7 +112,7 @@ def observe_to_vector(o):
 
 # make up a sample matrix of observation sequences
 def observe_to_matrix(o_list):
-	x = np.zeros(shape = (len(o_list), D), dtype = np.int)
+	x = np.zeros(shape = (len(o_list), D), dtype = np.int8)
 	for i, o in enumerate(o_list):
 		for f in extend_observe(o):
 			j = hash(f) % D
@@ -168,10 +169,12 @@ def viterbi(models, o_list, states):
 ######################################################################
 
 #load sequential data
-seqs = get_sequence(path)
+seqs = extract_file(path)
+pdb.set_trace()
 observe_list, state_list, pstate_list = reform_sequence(seqs)
 
 #for each state, train a logistic regression model
+start = time()
 models = {}
 states = list(set(state_list))
 for state in states:
@@ -180,13 +183,17 @@ for state in states:
 	y = state_list[indice]
 	models[state] = LogisticRegression(solver='lbfgs', multi_class='multinomial')
 	models[state].fit(x, y)
+print 'training finished, take time %d sec'%(time()-start)
 
 #full validation
+start = time()
 predict_state_list = []
 for seq in seqs:
 	o, s, ps = reform_sequence([seq])
 	prob, path = viterbi(models, o, states)
 	predict_state_list += path
+
+print 'testing finished, take time %d sec'%(time()-start)
 
 #precision & recall
 sl = state_list
