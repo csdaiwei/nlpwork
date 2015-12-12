@@ -1,0 +1,58 @@
+# 3-state
+loaded data, with D:10000
+cross validation...
+
+fold 0, training time: 0:00:55.13
+fold 0, testing time: 0:00:06.32
+fold 0, precision: 0.7950
+fold 0, recall: 0.6622
+
+fold 1, training time: 0:00:55.46
+fold 1, testing time: 0:00:06.04
+fold 1, precision: 0.7931
+fold 1, recall: 0.6539
+
+fold 2, training time: 0:00:54.90
+fold 2, testing time: 0:00:06.45
+fold 2, precision: 0.8236
+fold 2, recall: 0.6205
+
+fold 3, training time: 0:00:58.60
+fold 3, testing time: 0:00:05.88
+fold 3, precision: 0.7959
+fold 3, recall: 0.6567
+
+fold 4, training time: 0:00:57.17
+fold 4, testing time: 0:00:06.74
+fold 4, precision: 0.8389
+fold 4, recall: 0.6826
+
+
+# 13-state
+loaded data, with D:10000
+cross validation...
+
+fold 0, training time: 0:01:24.09
+fold 0, testing time: 0:00:25.03
+fold 0, precision: 0.6903
+fold 0, recall: 0.4585
+
+fold 1, training time: 0:01:25.15
+fold 1, testing time: 0:00:24.27
+fold 1, precision: 0.7363
+fold 1, recall: 0.4769
+
+fold 2, training time: 0:01:24.04
+fold 2, testing time: 0:00:25.78
+fold 2, precision: 0.7302
+fold 2, recall: 0.4578
+
+fold 3, training time: 0:01:25.35
+fold 3, testing time: 0:00:24.45
+fold 3, precision: 0.7061
+fold 3, recall: 0.4659
+
+fold 4, training time: 0:01:23.14
+fold 4, testing time: 0:00:27.01
+fold 4, precision: 0.7373
+fold 4, recall: 0.4770

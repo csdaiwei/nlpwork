@@ -10,7 +10,7 @@ from scipy.sparse import coo_matrix
 from sklearn.linear_model import LogisticRegression
 
 # training process in the end of file
-# read code from there
+# read code from there, maybe
 
 ######################################################################
 #### parameters, definitions #########################################
@@ -22,7 +22,9 @@ NULL_STATE = u'n'			#symbol for non-ne state
 BEGIN_STATE_PREFIX = u'b'	#symbol for begin character of a name entity
 INTER_STATE_PREFIX = u'i'	#symbol for next character of a name entity
 
-D = 10 ** 5		#hash trick size, aka dimension of features
+D = 10 ** 4				#hash trick size, aka dimension of features
+
+SIMPLIFY = False		#reduce ne type to 1 or not
 
 ######################################################################
 #### functions, classes ##############################################
@@ -49,10 +51,12 @@ def extract_line(line):
 			for ch in a:
 				yield (ch, NULL_STATE)		#null state
 		if b:
-			(nertype, _, name) = b.partition(':')
-			yield (name[0], BEGIN_STATE_PREFIX + u'_' + nertype)		#b ner state
+			(netype, _, name) = b.partition(':')
+			if SIMPLIFY:
+				netype = 'ne'
+			yield (name[0], BEGIN_STATE_PREFIX + u'_' + netype)		#b ner state
 			for ch in name[1:]:
-				yield (ch, INTER_STATE_PREFIX + u'_' + nertype)		#i ner state
+				yield (ch, INTER_STATE_PREFIX + u'_' + netype)		#i ner state
 		
 		# handle c recursively
 		line = c
@@ -71,7 +75,7 @@ def extract_file(path):
 					list of tuples, each element is an observation 
 					sequence gengrate from a line of inputfile
 			
-			sseqs:	 	similar as oseqs
+			sseqs:	similar as oseqs
 
 	'''
 	f = codecs.open(path, 'r', 'UTF-8')
@@ -131,12 +135,11 @@ class MEMM:
 		pstate_list = self._reform_pstate_seqs(state_seqs)				#list of all previous states
 
 		# for each state, training a maxent model
-		self.models = {}
 		for state in self.states:
 			indice = pstate_list == state
 			x = self._observe_to_matrix(observe_list[indice])
 			y = state_list[indice]
-			self.models[state] = LogisticRegression(solver='lbfgs', multi_class='multinomial')
+			self.models[state] = LogisticRegression(solver='lbfgs', multi_class='multinomial')	#ValueError when |set(y)|=1
 			self.models[state].fit(x, y)
 
 		# training finished
@@ -256,11 +259,11 @@ class MEMM:
 #end of class MEMM
 
 
-def cross_validation(model, oseqs, sseqs, k=10):
+def cross_validation(model, oseqs, sseqs, k=5):
 	
-	n = len(oseqs)	#assert len(oseq) == len(sseq)
-	c = n/k			#remainder removed division
-	for i in range(0, k):
+	n = len(oseqs)		#assert len(oseq) == len(sseq)
+	c = n/10			#remainder removed division
+	for i in range(0, 5):
 		test_oseqs = oseqs[c*i : c*(i+1)]
 		test_sseqs = sseqs[c*i : c*(i+1)]
 		train_oseqs = oseqs[0 : c*i] + oseqs[c*(i+1):]
@@ -286,18 +289,19 @@ def cross_validation(model, oseqs, sseqs, k=10):
 		print 'fold %d, precision: %.4f'%(i, precision(py, y))
 		print 'fold %d, recall: %.4f'%(i, recall(py, y))
 
+
 ######################################################################
 #### training & testing ##############################################
 ######################################################################
 
 observe_seqs, state_seqs = extract_file(path)
 
-print 'loaded data, with D:%d'%(D)
+print 'loaded data, with D=%d'%(D)
 print 'cross validation...'
 
 memm = MEMM(D, NULL_STATE)
 
-cross_validation(memm, observe_seqs, state_seqs)
+cross_validation(memm, observe_seqs, state_seqs, k=10)
 
 pdb.set_trace()
 
